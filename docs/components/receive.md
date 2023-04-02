@@ -49,14 +49,14 @@ Note that because of the built-in decommissioning process, the semantic of the `
 ```bash
 thanos receive \
     --tsdb.path "/path/to/receive/data/dir" \
-    --grpc-address 0.0.0.0:10907 \
-    --http-address 0.0.0.0:10909 \
+    --grpc-address [::]:10907 \
+    --http-address [::]:10909 \
     --receive.replication-factor 1 \
     --label "receive_replica=\"0\"" \
     --label "receive_cluster=\"eu1\"" \
     --receive.local-endpoint 127.0.0.1:10907 \
     --receive.hashrings-file ./data/hashring.json \
-    --remote-write.address 0.0.0.0:10908 \
+    --remote-write.address [::]:10908 \
     --objstore.config-file "bucket.yml"
 ```
 
@@ -215,7 +215,7 @@ usage: thanos receive [<flags>]
 Accept Prometheus remote write API requests and write to local tsdb.
 
 Flags:
-      --grpc-address="0.0.0.0:10901"
+      --grpc-address="[::]:10901"
                                  Listen ip:port address for gRPC endpoints
                                  (StoreAPI). Make sure this address is routable
                                  from other components.
@@ -241,7 +241,7 @@ Flags:
                                  Possible values are: "", "SHA256".
   -h, --help                     Show context-sensitive help (also try
                                  --help-long and --help-man).
-      --http-address="0.0.0.0:10902"
+      --http-address="[::]:10902"
                                  Listen host:port for HTTP endpoints.
       --http-grace-period=2m     Time to wait after an interrupt received for
                                  HTTP Server.
@@ -319,7 +319,7 @@ Flags:
       --receive.tenant-label-name="tenant_id"
                                  Label name through which the tenant will be
                                  announced.
-      --remote-write.address="0.0.0.0:19291"
+      --remote-write.address="[::]:19291"
                                  Address to listen on for remote write requests.
       --remote-write.client-server-name=""
                                  Server name to verify the hostname

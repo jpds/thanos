@@ -8,7 +8,7 @@ Example command to run Query Frontend:
 
 ```bash
 thanos query-frontend \
-    --http-address     "0.0.0.0:9090" \
+    --http-address     "[::]:9090" \
     --query-frontend.downstream-url="<thanos-querier>:<querier-http-port>"
 ```
 
@@ -173,7 +173,7 @@ If downstream queriers need basic authentication to access, we can run query-fro
 
 ```bash
 thanos query-frontend \
-    --http-address     "0.0.0.0:9090" \
+    --http-address     "[::]:9090" \
     --query-frontend.forward-header "Authorization"
     --query-frontend.downstream-url="<thanos-querier>:<querier-http-port>"
 ```
@@ -193,7 +193,7 @@ Flags:
                                  compression).
   -h, --help                     Show context-sensitive help (also try
                                  --help-long and --help-man).
-      --http-address="0.0.0.0:10902"
+      --http-address="[::]:10902"
                                  Listen host:port for HTTP endpoints.
       --http-grace-period=2m     Time to wait after an interrupt received for
                                  HTTP Server.

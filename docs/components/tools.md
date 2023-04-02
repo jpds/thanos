@@ -212,7 +212,7 @@ Web interface for remote storage bucket.
 Flags:
   -h, --help                    Show context-sensitive help (also try
                                 --help-long and --help-man).
-      --http-address="0.0.0.0:10902"
+      --http-address="[::]:10902"
                                 Listen host:port for HTTP endpoints.
       --http-grace-period=2m    Time to wait after an interrupt received for
                                 HTTP Server.
@@ -511,7 +511,7 @@ Flags:
                               replicated. Repeated flag.
   -h, --help                  Show context-sensitive help (also try --help-long
                               and --help-man).
-      --http-address="0.0.0.0:10902"
+      --http-address="[::]:10902"
                               Listen host:port for HTTP endpoints.
       --http-grace-period=2m  Time to wait after an interrupt received for HTTP
                               Server.
@@ -622,7 +622,7 @@ Flags:
                               are: "", "SHA256".
   -h, --help                  Show context-sensitive help (also try --help-long
                               and --help-man).
-      --http-address="0.0.0.0:10902"
+      --http-address="[::]:10902"
                               Listen host:port for HTTP endpoints.
       --http-grace-period=2m  Time to wait after an interrupt received for HTTP
                               Server.

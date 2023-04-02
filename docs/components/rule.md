@@ -19,7 +19,7 @@ thanos rule \
     --data-dir             "/path/to/data" \
     --eval-interval        "30s" \
     --rule-file            "/path/to/rules/*.rules.yaml" \
-    --alert.query-url      "http://0.0.0.0:9090" \ # This tells what query URL to link to in UI.
+    --alert.query-url      "http://[::]:9090" \ # This tells what query URL to link to in UI.
     --alertmanagers.url    "http://alert.thanos.io" \
     --query                "query.example.org" \
     --query                "query2.example.org" \
@@ -217,7 +217,7 @@ thanos rule \
     --data-dir                  "/path/to/data" \
     --eval-interval             "30s" \
     --rule-file                 "/path/to/rules/*.rules.yaml" \
-    --alert.query-url           "http://0.0.0.0:9090" \ # This tells what query URL to link to in UI.
+    --alert.query-url           "http://[::]:9090" \ # This tells what query URL to link to in UI.
     --alertmanagers.url         "http://alert.thanos.io" \
     --query                     "query.example.org" \
     --query                     "query2.example.org" \
@@ -317,7 +317,7 @@ Flags:
                                  period.
       --for-outage-tolerance=1h  Max time to tolerate prometheus outage for
                                  restoring "for" state of alert.
-      --grpc-address="0.0.0.0:10901"
+      --grpc-address="[::]:10901"
                                  Listen ip:port address for gRPC endpoints
                                  (StoreAPI). Make sure this address is routable
                                  from other components.
@@ -343,7 +343,7 @@ Flags:
                                  Possible values are: "", "SHA256".
   -h, --help                     Show context-sensitive help (also try
                                  --help-long and --help-man).
-      --http-address="0.0.0.0:10902"
+      --http-address="[::]:10902"
                                  Listen host:port for HTTP endpoints.
       --http-grace-period=2m     Time to wait after an interrupt received for
                                  HTTP Server.

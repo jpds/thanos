@@ -29,7 +29,7 @@ type grpcConfig struct {
 func (gc *grpcConfig) registerFlag(cmd extkingpin.FlagClause) *grpcConfig {
 	cmd.Flag("grpc-address",
 		"Listen ip:port address for gRPC endpoints (StoreAPI). Make sure this address is routable from other components.").
-		Default("0.0.0.0:10901").StringVar(&gc.bindAddress)
+		Default("[::]:10901").StringVar(&gc.bindAddress)
 	cmd.Flag("grpc-server-tls-cert",
 		"TLS Certificate for gRPC server, leave blank to disable TLS").
 		Default("").StringVar(&gc.tlsSrvCert)
@@ -57,7 +57,7 @@ type httpConfig struct {
 func (hc *httpConfig) registerFlag(cmd extkingpin.FlagClause) *httpConfig {
 	cmd.Flag("http-address",
 		"Listen host:port for HTTP endpoints.").
-		Default("0.0.0.0:10902").StringVar(&hc.bindAddress)
+		Default("[::]:10902").StringVar(&hc.bindAddress)
 	cmd.Flag("http-grace-period",
 		"Time to wait after an interrupt received for HTTP Server.").
 		Default("2m").SetValue(&hc.gracePeriod)

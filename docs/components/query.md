@@ -10,7 +10,7 @@ Example command to run Querier:
 
 ```bash
 thanos query \
-    --http-address     "0.0.0.0:9090" \
+    --http-address     "[::]:9090" \
     --store            "<store-api>:<grpc-port>" \
     --store            "<store-api2>:<grpc-port>"
 ```
@@ -69,7 +69,7 @@ If we configure Querier like this:
 
 ```
 thanos query \
-    --http-address        "0.0.0.0:9090" \
+    --http-address        "[::]:9090" \
     --query.replica-label "replica" \
     --store               "<store-api>:<grpc-port>" \
     --store               "<store-api2>:<grpc-port>" \
@@ -94,7 +94,7 @@ WITHOUT this replica flag (deduplication turned off), we will get 3 results:
 
 ```
 thanos query \
-    --http-address        "0.0.0.0:9090" \
+    --http-address        "[::]:9090" \
     --query.replica-label "replica" \
     --query.replica-label "replicaX" \
     --store               "<store-api>:<grpc-port>" \
@@ -296,7 +296,7 @@ Flags:
                                  API servers that are always used, even if
                                  the health check fails. Useful if you have a
                                  caching layer on top.
-      --grpc-address="0.0.0.0:10901"
+      --grpc-address="[::]:10901"
                                  Listen ip:port address for gRPC endpoints
                                  (StoreAPI). Make sure this address is routable
                                  from other components.
@@ -331,7 +331,7 @@ Flags:
                                  disable TLS
   -h, --help                     Show context-sensitive help (also try
                                  --help-long and --help-man).
-      --http-address="0.0.0.0:10902"
+      --http-address="[::]:10902"
                                  Listen host:port for HTTP endpoints.
       --http-grace-period=2m     Time to wait after an interrupt received for
                                  HTTP Server.

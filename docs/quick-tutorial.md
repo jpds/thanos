@@ -92,8 +92,8 @@ thanos sidecar \
     --tsdb.path                 /var/prometheus \
     --objstore.config-file      bucket_config.yaml \       # Bucket config file to send data to
     --prometheus.url            http://localhost:9090 \    # Location of the Prometheus HTTP server
-    --http-address              0.0.0.0:19191 \            # HTTP endpoint for collecting metrics on Sidecar
-    --grpc-address              0.0.0.0:19090              # GRPC endpoint for StoreAPI
+    --http-address              [::]:19191 \            # HTTP endpoint for collecting metrics on Sidecar
+    --grpc-address              [::]:19090              # GRPC endpoint for StoreAPI
 ```
 
 * *[Example Kubernetes manifests using Prometheus operator](https://github.com/coreos/prometheus-operator/tree/master/example/thanos)*
@@ -130,9 +130,9 @@ Below, we will set up a Thanos Querier to connect to our Sidecars, and expose it
 
 ```bash
 thanos query \
-    --http-address 0.0.0.0:19192 \                                # HTTP Endpoint for Thanos Querier UI
+    --http-address [::]:19192 \                                   # HTTP Endpoint for Thanos Querier UI
     --store        1.2.3.4:19090 \                                # Static gRPC Store API Address for the query node to query
-    --store        1.2.3.5:19090 \                                # Also repeatable
+    --store        [2001:db8::87]:19090 \                         # Also repeatable
     --store        dnssrv+_grpc._tcp.thanos-store.monitoring.svc  # Supports DNS A & SRV records
 ```
 
@@ -161,9 +161,9 @@ Ensure your Prometheus instances have been reloaded with the configuration you d
 
 ```bash
 thanos query \
-    --http-address        0.0.0.0:19192 \
+    --http-address        [::]:19192 \
     --store               1.2.3.4:19090 \
-    --store               1.2.3.5:19090 \
+    --store               [2001:db8::87]:19090 \
     --query.replica-label replica          # Replica label for deduplication
     --query.replica-label replicaX         # Supports multiple replica labels for deduplication
 ```
@@ -180,10 +180,10 @@ There are various ways to tell Thanos Querier about the Store APIs it should que
 
 ```bash
 thanos query \
-    --http-address 0.0.0.0:19192 \              # Endpoint for Thanos Querier UI
-    --grpc-address 0.0.0.0:19092 \              # gRPC endpoint for Store API
+    --http-address [::]:19192 \              # Endpoint for Thanos Querier UI
+    --grpc-address [::]:19092 \              # gRPC endpoint for Store API
     --store        1.2.3.4:19090 \              # Static gRPC Store API Address for the query node to query
-    --store        1.2.3.5:19090 \              # Also repeatable
+    --store        [2001:db8::87]:19090 \       # Also repeatable
     --store        dns+rest.thanos.peers:19092  # Use DNS lookup for getting all registered IPs as separate Store APIs
 ```
 
@@ -199,8 +199,8 @@ As Thanos Sidecar backs up data into the object storage bucket of your choice, y
 thanos store \
     --data-dir             /var/thanos/store \   # Disk space for local caches
     --objstore.config-file bucket_config.yaml \  # Bucket to fetch data from
-    --http-address         0.0.0.0:19191 \       # HTTP endpoint for collecting metrics on the Store Gateway
-    --grpc-address         0.0.0.0:19090         # GRPC endpoint for StoreAPI
+    --http-address         [::]:19191 \       # HTTP endpoint for collecting metrics on the Store Gateway
+    --grpc-address         [::]:19090         # GRPC endpoint for StoreAPI
 ```
 
 Store Gateway uses a small amount of disk space for caching basic information about data in the object storage bucket. This will rarely exceed more than a few gigabytes and is used to improve restart times. It is useful but not required to preserve it across restarts.
@@ -219,7 +219,7 @@ Thanos Compactor simply scans the object storage bucket and performs compaction 
 thanos compact \
     --data-dir             /var/thanos/compact \  # Temporary workspace for data processing
     --objstore.config-file bucket_config.yaml \   # Bucket where compacting will be performed
-    --http-address         0.0.0.0:19191          # HTTP endpoint for collecting metrics on the compactor
+    --http-address         [::]:19191          # HTTP endpoint for collecting metrics on the compactor
 ```
 
 Compactor is not in the critical path of querying or data backup. It can either be run as a periodic batch job or be left running to always compact data as soon as possible. It is recommended to provide 100-300GB of local disk space for data processing.

@@ -812,7 +812,7 @@ func (rc *receiveConfig) registerFlag(cmd extkingpin.FlagClause) {
 	rc.storeRateLimits.RegisterFlags(cmd)
 
 	cmd.Flag("remote-write.address", "Address to listen on for remote write requests.").
-		Default("0.0.0.0:19291").StringVar(&rc.rwAddress)
+		Default("[::]:19291").StringVar(&rc.rwAddress)
 
 	cmd.Flag("remote-write.server-tls-cert", "TLS Certificate for HTTP server, leave blank to disable TLS.").Default("").StringVar(&rc.rwServerCert)
 
